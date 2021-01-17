@@ -37,7 +37,7 @@ public extension KeyboardInputSet {
 public extension KeyboardInputSet {
     
     static func standardSymbolic(center: [String]) -> SymbolicKeyboardInputSet {
-        SymbolicKeyboardInputSet(inputRows: [
+        SymbolicKeyboardInputSet(symbols: [
             standardSymbolicTop,
             center,
             standardSymbolicBottom

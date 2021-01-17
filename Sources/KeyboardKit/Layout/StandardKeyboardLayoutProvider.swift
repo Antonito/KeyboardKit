@@ -255,15 +255,18 @@ private extension KeyboardContext {
         return KeyboardActionRows(characters: rows)
     }
     
-    func inputRows(for context: KeyboardContext) -> [KeyboardInputSet.InputRow] {
+    func inputRows(for context: KeyboardContext) -> [[String]] {
         let provider = keyboardInputSetProvider
         switch keyboardType {
         case .alphabetic(let state):
             let rows = provider.alphabeticInputSet(for: context).inputRows
-            return state.isUppercased ? rows.uppercased() : rows
-        case .numeric: return provider.numericInputSet(for: context).inputRows
-        case .symbolic: return provider.symbolicInputSet(for: context).inputRows
-        default: return provider.alphabeticInputSet(for: context).inputRows
+          return state.isUppercased ? rows.uppercased() : rows.lowercased()
+        case .numeric:
+          return provider.numericInputSet(for: context).inputRows.elements
+        case .symbolic:
+          return provider.symbolicInputSet(for: context).inputRows.elements
+        default:
+          return provider.alphabeticInputSet(for: context).inputRows.elements
         }
     }
 }

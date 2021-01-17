@@ -27,7 +27,7 @@ public class KeyboardInputSet: Equatable {
         self.inputRows = inputRows
     }
     
-    public typealias InputRow = [String]
+    public typealias InputRow = [KeyboardInputSetRow]
     
     public let inputRows: [InputRow]
     
@@ -39,14 +39,29 @@ public class KeyboardInputSet: Equatable {
 /**
  This input set should only be used in alphabetic keyboards.
  */
-public class AlphabeticKeyboardInputSet: KeyboardInputSet {}
+public class AlphabeticKeyboardInputSet: KeyboardInputSet {
+  convenience init(alphabet: [[String]]) {
+    let inputRows = alphabet.map { $0.map { KeyboardInputSetRow(lowercased: $0.lowercased(), uppercased: $0.uppercased()) } }
+    self.init(inputRows: inputRows)
+  }
+}
 
 /**
  This input set should only be used in numeric keyboards.
  */
-public class NumericKeyboardInputSet: KeyboardInputSet {}
+public class NumericKeyboardInputSet: KeyboardInputSet {
+  convenience init(symbols: [[String]]) {
+    let inputRows = symbols.map { $0.map { KeyboardInputSetRow(lowercased: $0, uppercased: $0) } }
+    self.init(inputRows: inputRows)
+  }
+}
 
 /**
  This input set should only be used in symbolic keyboards.
  */
-public class SymbolicKeyboardInputSet: KeyboardInputSet {}
+public class SymbolicKeyboardInputSet: KeyboardInputSet {
+  convenience init(symbols: [[String]]) {
+    let inputRows = symbols.map { $0.map { KeyboardInputSetRow(lowercased: $0, uppercased: $0) } }
+    self.init(inputRows: inputRows)
+  }
+}

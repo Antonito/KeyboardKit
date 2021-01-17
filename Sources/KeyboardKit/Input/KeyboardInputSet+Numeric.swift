@@ -40,7 +40,7 @@ public extension KeyboardInputSet {
 public extension KeyboardInputSet {
     
     static func standardNumeric(currency: String) -> NumericKeyboardInputSet {
-        NumericKeyboardInputSet(inputRows: [
+        NumericKeyboardInputSet(symbols: [
             standardNumericTop,
             ["-", "/", ":", ";", "(", ")", currency, "&", "@", "\""],
             standardNumericBottom

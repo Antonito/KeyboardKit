@@ -14,16 +14,16 @@ public final class SymbolicKeyboardInputSetRow: KeyboardInputSetRow {
 
     /// Returns the lowercase version of the callout, for the provided locale.
     public override func lowercasedCallouts(for locale: Locale) -> [String] {
-        self.getCallouts(for: locale).map(String.init)
+        Self.getCallouts(for: locale, self.lowercase).map(String.init)
     }
 
     /// Returns the uppercase version of the callout, for the provided locale.
     public override func uppercasedCallouts(for locale: Locale) -> [String] {
-        self.getCallouts(for: locale).map(String.init)
+        Self.getCallouts(for: locale, self.lowercase).map(String.init)
     }
 
-    private func getCallouts(for locale: Locale) -> String {
-        switch self.lowercase {
+    static private func getCallouts(for locale: Locale, _ symbol: String) -> String {
+        switch symbol {
         case "%": return "%‰"
         case "=": return "=≠≈"
 

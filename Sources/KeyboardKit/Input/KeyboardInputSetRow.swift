@@ -8,40 +8,51 @@
 import Foundation
 
 public class KeyboardInputSetRow: Equatable {
-    public let lowercased: String
-    public let uppercased: String
+    public let lowercase: String
+    public let uppercase: String
 
-    public init(lowercased: String, uppercased: String) {
-        self.lowercased = lowercased
-        self.uppercased = uppercased
+    public init(
+        lowercase: String,
+        uppercase: String
+    ) {
+        self.lowercase = lowercase
+        self.uppercase = uppercase
     }
 
     public static func == (
         lhs: KeyboardInputSetRow,
         rhs: KeyboardInputSetRow
     ) -> Bool {
-        lhs.lowercased == rhs.lowercased
-          && lhs.uppercased == rhs.uppercased
+        lhs.lowercase == rhs.lowercase
+          && lhs.uppercase == rhs.uppercase
+    }
+
+    /// Returns the lowercase version of the callout, for the provided locale.
+    func lowercasedCallouts(for locale: Locale) -> [String] { [] }
+
+    /// Returns the uppercase version of the callout, for the provided locale.
+    func uppercasedCallouts(for locale: Locale) -> [String] { [] }
+}
+
+// MARK: - Sequence
+
+public extension Sequence where Element == KeyboardInputSetRow {
+    var symbols: [String] {
+        self.map { $0.lowercase }
+    }
+
+    func lowercased() -> [String] {
+        self.map { $0.lowercase }
+    }
+
+    func uppercased() -> [String] {
+        self.map { $0.uppercase }
     }
 }
 
-extension Sequence where Element == KeyboardInputSetRow {
-    public var elements: [String] {
-        self.map { $0.lowercased }
-    }
-
-    public func lowercased() -> [String] {
-        self.map { $0.lowercased }
-    }
-
-    public func uppercased() -> [String] {
-        self.map { $0.uppercased }
-    }
-}
-
-extension Sequence where Iterator.Element == [KeyboardInputSetRow] {
-    var elements: [[String]] {
-        self.map { $0.elements }
+public extension Sequence where Iterator.Element == [KeyboardInputSetRow] {
+    var symbols: [[String]] {
+        self.map { $0.symbols }
     }
 
     func uppercased() -> [[String]] {

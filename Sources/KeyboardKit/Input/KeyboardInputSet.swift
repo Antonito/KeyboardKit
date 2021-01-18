@@ -41,7 +41,7 @@ public class KeyboardInputSet: Equatable {
  */
 public class AlphabeticKeyboardInputSet: KeyboardInputSet {
   convenience init(alphabet: [[String]]) {
-    let inputRows = alphabet.map { $0.map { KeyboardInputSetRow(lowercased: $0.lowercased(), uppercased: $0.uppercased()) } }
+    let inputRows = alphabet.map { $0.map { KeyboardInputSetRow(lowercase: $0.lowercased(), uppercase: $0.uppercased()) } }
     self.init(inputRows: inputRows)
   }
 }
@@ -51,7 +51,7 @@ public class AlphabeticKeyboardInputSet: KeyboardInputSet {
  */
 public class NumericKeyboardInputSet: KeyboardInputSet {
   convenience init(symbols: [[String]]) {
-    let inputRows = symbols.map { $0.map { KeyboardInputSetRow(lowercased: $0, uppercased: $0) } }
+    let inputRows = symbols.map { $0.map { NumericKeyboardInputSetRow(symbol: $0) } }
     self.init(inputRows: inputRows)
   }
 }
@@ -61,7 +61,7 @@ public class NumericKeyboardInputSet: KeyboardInputSet {
  */
 public class SymbolicKeyboardInputSet: KeyboardInputSet {
   convenience init(symbols: [[String]]) {
-    let inputRows = symbols.map { $0.map { KeyboardInputSetRow(lowercased: $0, uppercased: $0) } }
+    let inputRows = symbols.map { $0.map { SymbolicKeyboardInputSetRow(symbol: $0) } }
     self.init(inputRows: inputRows)
   }
 }

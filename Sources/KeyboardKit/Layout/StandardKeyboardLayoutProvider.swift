@@ -262,11 +262,11 @@ private extension KeyboardContext {
             let rows = provider.alphabeticInputSet(for: context).inputRows
           return state.isUppercased ? rows.uppercased() : rows.lowercased()
         case .numeric:
-          return provider.numericInputSet(for: context).inputRows.elements
+          return provider.numericInputSet(for: context).inputRows.symbols
         case .symbolic:
-          return provider.symbolicInputSet(for: context).inputRows.elements
+          return provider.symbolicInputSet(for: context).inputRows.symbols
         default:
-          return provider.alphabeticInputSet(for: context).inputRows.elements
+          return provider.alphabeticInputSet(for: context).inputRows.symbols
         }
     }
 }

@@ -8,15 +8,23 @@
 import Foundation
 
 public class KeyboardInputSetRow: Equatable {
+    public typealias LocalizedCallouts = [Locale: [String]]
+
     public let lowercase: String
     public let uppercase: String
+    public let lowercaseCallout: LocalizedCallouts
+    public let uppercaseCallout: LocalizedCallouts
 
     public init(
         lowercase: String,
-        uppercase: String
+        uppercase: String,
+        lowercaseCallout: LocalizedCallouts = [:],
+        uppercaseCallout: LocalizedCallouts = [:]
     ) {
         self.lowercase = lowercase
         self.uppercase = uppercase
+        self.lowercaseCallout = lowercaseCallout
+        self.uppercaseCallout = uppercaseCallout
     }
 
     public static func == (
@@ -28,10 +36,10 @@ public class KeyboardInputSetRow: Equatable {
     }
 
     /// Returns the lowercase version of the callout, for the provided locale.
-    func lowercasedCallouts(for locale: Locale) -> [String] { [] }
+    func lowercasedCallouts(for locale: Locale) -> [String] { self.lowercaseCallout[locale] ?? [] }
 
     /// Returns the uppercase version of the callout, for the provided locale.
-    func uppercasedCallouts(for locale: Locale) -> [String] { [] }
+    func uppercasedCallouts(for locale: Locale) -> [String] { self.uppercaseCallout[locale] ?? [] }
 }
 
 // MARK: - Sequence
